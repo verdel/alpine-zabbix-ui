@@ -1,0 +1,27 @@
+#!/usr/bin/with-contenv bash
+
+if [ "x$DB_ENV_DB_PASS" != "x"  ]; then
+  DB_PASS=$DB_ENV_DB_PASS
+fi
+if [ "x$DB_ENV_DB_USER" != "x"  ]; then
+  DB_USER=$DB_ENV_DB_USER
+fi
+if [ "x$DB_PORT_3306_TCP_ADDR" != "x"  ]; then
+  DB_HOST=$DB_PORT_3306_TCP_ADDR
+fi
+if [ "x$DB_PORT_3306_TCP_PORT" != "x"  ]; then
+  DB_PORT=$DB_PORT_3306_TCP_PORT
+fi
+
+export DB_PASS
+export DB_USER
+export DB_HOST
+export DB_PORT
+
+_file_marker=".ui-configured"
+
+if [ ! -f "$_file_marker" ]; then  
+  touch "$_file_marker"  
+  sed -e "s/Group apache/Group www-data/g" -i /etc/apache2/httpd.conf
+  sed -e "s/{{HTTP_FQDN}}/$HTTP_FQDN/g" -i /etc/apache2/conf.d/zabbix.conf
+fi

@@ -19,7 +19,7 @@ RUN apk --update add \
     php5 \
     php5-mysqli \
     php5-apache2 \
-    zabbix-webif@edge \
+    zabbix-webif@community \
     # Clean up
     && rm -rf \
     /usr/share/man \

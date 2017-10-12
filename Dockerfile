@@ -19,6 +19,8 @@ RUN apk --update add \
     php5 \
     php5-mysqli \
     php5-apache2 \
+    php5-ctype \
+    php5-bcmath \
     zabbix-webif@community \
     # Clean up
     && rm -rf \
